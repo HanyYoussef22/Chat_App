@@ -23,6 +23,7 @@ class _RegisterScreenState extends BaseState<RegisterScreen, RgisterViewModel>
   GlobalKey<FormState> Formkey = GlobalKey<FormState>();
   var firstNameController = TextEditingController();
   var lastNameController = TextEditingController();
+  var UserNameController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
@@ -98,7 +99,24 @@ class _RegisterScreenState extends BaseState<RegisterScreen, RgisterViewModel>
                           hintText: 'Enter Your Last Name'),
                       validator: (text) {
                         if (text!.isEmpty || text.trim().isEmpty) {
-                          return 'Pleas Enter Your Last Name';
+                          return 'Pleas Enter Your First Name';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    TextFormField(
+                      controller: UserNameController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(color: Colors.blue)),
+                          hintText: 'Enter Your User Name'),
+                      validator: (text) {
+                        if (text!.isEmpty || text.trim().isEmpty) {
+                          return 'Pleas Enter Your User Name';
                         }
                         return null;
                       },
@@ -205,7 +223,7 @@ class _RegisterScreenState extends BaseState<RegisterScreen, RgisterViewModel>
       viewModel.createAcount(
           fName: firstNameController.text,
           lName: lastNameController.text,
-          userName: '$firstNameController+$lastNameController',
+          userName: UserNameController.text,
           email: emailController.text,
           password: passwordController.text);
     }

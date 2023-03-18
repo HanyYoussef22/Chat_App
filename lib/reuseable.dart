@@ -90,6 +90,44 @@ Widget defaultTextButton({
 //       fontSize: 16.0
 //   );
 // }
+// defaultTextFormField({
+//   bool obscureText = false,
+//   TextInputType? keyboardType,
+//   Controller,
+//   VoidCallback? onPressed,
+//   validator,
+//   double? circular,
+//   VoidCallback? onPressedIconsuffixIcon,
+//   IconButton? prefixIcon,
+//   IconData? iconDatasuffixIcon,
+//   Color? Colorfill,
+//   String? hintText,
+//
+// }) {
+//   return TextFormField(
+//     obscureText: obscureText,
+//     keyboardType: keyboardType,
+//     controller: Controller,
+//     onTap: onPressed,
+//     validator: validator,
+//     decoration: InputDecoration(
+//       prefixIcon: prefixIcon,
+//       filled: true,
+//       fillColor: Colorfill ?? Colors.white,
+//       hintText: hintText,
+//       hintStyle: const TextStyle(
+//         color: Colors.grey,
+//         fontFamily: 'oxygen',
+//         // fontWeight: FontWeight.w600,
+//       ),
+//       suffixIcon: IconButton(onPressed: onPressedIconsuffixIcon, icon:(Icon(iconDatasuffixIcon)),),
+//       border: OutlineInputBorder(
+//         borderRadius: BorderRadius.circular(circular!),
+//         borderSide: BorderSide(color: Colors.blue),
+//       ),
+//     ),
+//   );
+// }
 
 Widget defaultTextField({
   double radius = 12,
@@ -112,5 +150,40 @@ Widget defaultTextField({
       }
       return null;
     },
+  );
+}
+
+defaultTextFormField({
+  VoidCallback? onPressed,
+  TextInputType? keyboardType,
+  required String? hintText,
+  required String? Function(String?) validate,
+  required TextEditingController? Controller,
+  IconButton? prefixIcon,
+  double? circular,
+  Color? Colorfill,
+  bool obscureText = false,
+}) {
+  return TextFormField(
+    keyboardType: keyboardType,
+    obscureText: obscureText,
+    controller: Controller,
+    onTap: onPressed,
+    validator: validate,
+    decoration: InputDecoration(
+      prefixIcon: prefixIcon,
+      filled: true,
+      fillColor: Colorfill ?? Colors.white,
+      hintText: hintText,
+      hintStyle: const TextStyle(
+        color: Colors.grey,
+        fontFamily: 'oxygen',
+        // fontWeight: FontWeight.w600,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(circular ?? 0),
+        borderSide: BorderSide(color: Colors.blue),
+      ),
+    ),
   );
 }

@@ -1,3 +1,4 @@
+import 'package:chata_pp/Modules/Chat/chatScreen.dart';
 import 'package:chata_pp/Modules/Lodin/LoginScreen.dart';
 import 'package:chata_pp/Modules/Register/Register_Screen.dart';
 import 'package:chata_pp/Modules/add_Rooms/add_room.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           ? LoginScreen.roudeName
           : HomeScreen.roudeName,
       routes: {
+        ChatScreen.roudName: (context) => ChatScreen(),
         RegisterScreen.roudeName: (context) => RegisterScreen(),
         LoginScreen.roudeName: (context) => LoginScreen(),
         HomeScreen.roudeName: (context) => HomeScreen(),

@@ -145,14 +145,14 @@ class _AddRoomScreenState extends BaseState<AddRoomScreen, AddRoomViewModel>
                                   height: 20,
                                 ),
                                 TextFormField(
-                                  controller: RomeCatogryController,
+                                  controller: RomeDescriptionController,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(12),
                                         borderSide:
                                             BorderSide(color: Colors.blue),
                                       ),
-                                      hintText: ' Rome Catogry'),
+                                      hintText: ' Rome description'),
                                   validator: (text) {
                                     if (text!.isEmpty || text.trim().isEmpty) {
                                       return 'Pleas Enter Your Rome Catogry';

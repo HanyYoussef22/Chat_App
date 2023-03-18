@@ -8,6 +8,10 @@ class UserProvider extends ChangeNotifier {
   User? firebaseUser;
   MyUser? user;
 
+  UserPrvider() {
+    initMyUser();
+  }
+
   UserProvider() {
     firebaseUser = FirebaseAuth.instance.currentUser;
     initMyUser();
