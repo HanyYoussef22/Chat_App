@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../datdbase/database_utils.dart';
-import 'MassageDetalis.dart';
+import 'ChatMassage/MassageDetalis.dart';
 
 class ChatScreen extends StatefulWidget {
   static const String roudName = 'Chat';
@@ -66,9 +66,9 @@ class _ChatScreenState extends BaseState<ChatScreen, ChatViewModel>
             padding: const EdgeInsets.all(5.0),
             child: Container(
               margin:
-                  EdgeInsets.only(top: height * 0.05, bottom: height * 0.01),
+                  EdgeInsets.only(top: height * 0.025, bottom: height * 0.01),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color(0xFFF1FBFF),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
@@ -133,7 +133,7 @@ class _ChatScreenState extends BaseState<ChatScreen, ChatViewModel>
                             children: [
                               Text(
                                 'Send',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Color(0xFFF1FBFF)),
                               ),
                               Icon(
                                 Icons.send,

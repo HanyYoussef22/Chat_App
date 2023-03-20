@@ -48,6 +48,8 @@ class _RegisterScreenState extends BaseState<RegisterScreen, RgisterViewModel>
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => viewModel,
       child: Stack(
@@ -69,146 +71,160 @@ class _RegisterScreenState extends BaseState<RegisterScreen, RgisterViewModel>
               padding: const EdgeInsets.all(8.0),
               child: Form(
                 key: Formkey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    TextFormField(
-                      controller: firstNameController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Colors.blue)),
-                          hintText: 'Enter Your First Name'),
-                      validator: (text) {
-                        if (text!.isEmpty || text.trim().isEmpty) {
-                          return 'Pleas Enter Your First Name';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      controller: lastNameController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Colors.blue)),
-                          hintText: 'Enter Your Last Name'),
-                      validator: (text) {
-                        if (text!.isEmpty || text.trim().isEmpty) {
-                          return 'Pleas Enter Your First Name';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      controller: UserNameController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Colors.blue)),
-                          hintText: 'Enter Your User Name'),
-                      validator: (text) {
-                        if (text!.isEmpty || text.trim().isEmpty) {
-                          return 'Pleas Enter Your User Name';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        hintText: 'Enter Your Email',
-                        // hintStyle: TextStyle(fontSize: 13),
-                      ),
-                      validator: (text) {
-                        if (text!.isEmpty || text.trim().isEmpty) {
-                          return 'Pleas Enter Your Email';
-                        }
-                        bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(text);
-                        if (!emailValid) {
-                          return 'Email not Valid';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    TextFormField(
-                      controller: passwordController,
-                      obscureText: obscureText,
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            if (obscureText == false) {
-                              obscureText = true;
-                            } else if (obscureText == true) {
-                              obscureText = false;
-                            }
-                            setState(() {});
-                          },
-                          icon: Icon(obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        hintText: 'Password',
-                        // hintStyle: TextStyle(fontSize: 13),
-                      ),
-                      validator: (text) {
-                        if (text!.isEmpty || text.trim().isEmpty) {
-                          return 'Pleas Enter Your Password';
-                        }
-                        if (text.length < 6) {
-                          return 'Password Enter Valid ';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    defaultButton(
-                        text: "Create Email",
-                        onPressed: () {
-                          RegisterScreenFunction();
-                        },
-                        radius: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                child: SingleChildScrollView(
+                  child: IntrinsicHeight(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        TextButton(
+                        Container(
+                            width: width * 0.25,
+                            height: height * 0.23,
+                            margin: EdgeInsets.only(
+                              left: 45,
+                            ),
+                            child: Image.asset('assets/add.png')),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: firstNameController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(color: Colors.blue)),
+                              hintText: 'Enter Your First Name'),
+                          validator: (text) {
+                            if (text!.isEmpty || text.trim().isEmpty) {
+                              return 'Pleas Enter Your First Name';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        // TextFormField(
+                        //   controller: lastNameController,
+                        //   decoration: InputDecoration(
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(12),
+                        //           borderSide: BorderSide(color: Colors.blue)),
+                        //       hintText: 'Enter Your Last Name'),
+                        //   validator: (text) {
+                        //     if (text!.isEmpty || text.trim().isEmpty) {
+                        //       return 'Pleas Enter Your First Name';
+                        //     }
+                        //     return null;
+                        //   },
+                        // ),
+                        // SizedBox(
+                        //   height: 12,
+                        // ),
+                        TextFormField(
+                          controller: UserNameController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(color: Colors.blue)),
+                              hintText: 'Enter Your User Name'),
+                          validator: (text) {
+                            if (text!.isEmpty || text.trim().isEmpty) {
+                              return 'Pleas Enter Your User Name';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        TextFormField(
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Colors.blue),
+                            ),
+                            hintText: 'Enter Your Email',
+                            // hintStyle: TextStyle(fontSize: 13),
+                          ),
+                          validator: (text) {
+                            if (text!.isEmpty || text.trim().isEmpty) {
+                              return 'Pleas Enter Your Email';
+                            }
+                            bool emailValid = RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(text);
+                            if (!emailValid) {
+                              return 'Email not Valid';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        TextFormField(
+                          controller: passwordController,
+                          obscureText: obscureText,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                if (obscureText == false) {
+                                  obscureText = true;
+                                } else if (obscureText == true) {
+                                  obscureText = false;
+                                }
+                                setState(() {});
+                              },
+                              icon: Icon(obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Colors.blue),
+                            ),
+                            hintText: 'Password',
+                            // hintStyle: TextStyle(fontSize: 13),
+                          ),
+                          validator: (text) {
+                            if (text!.isEmpty || text.trim().isEmpty) {
+                              return 'Pleas Enter Your Password';
+                            }
+                            if (text.length < 6) {
+                              return 'Password Enter Valid ';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        defaultButton(
+                            text: "Create Email",
                             onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, LoginScreen.roudeName);
+                              RegisterScreenFunction();
                             },
-                            child: Text(
-                              'already have an account?',
-                              style: TextStyle(color: Colors.blue),
-                            )),
+                            radius: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, LoginScreen.roudeName);
+                                },
+                                child: Text(
+                                  'already have an account?',
+                                  style: TextStyle(color: Colors.blue),
+                                )),
+                          ],
+                        )
                       ],
-                    )
-                  ],
+                    ),
+                  ),
                 ),
               ),
             ),

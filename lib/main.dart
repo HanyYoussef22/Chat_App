@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Modules/Lodin/resetPassword.dart';
 import 'Provider/user_Provider.dart';
 
 void main() async {
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           : HomeScreen.roudeName,
       routes: {
         ChatScreen.roudName: (context) => ChatScreen(),
+        ResetPasswordScreen.roudeName: (context) => ResetPasswordScreen(),
         RegisterScreen.roudeName: (context) => RegisterScreen(),
         LoginScreen.roudeName: (context) => LoginScreen(),
         HomeScreen.roudeName: (context) => HomeScreen(),

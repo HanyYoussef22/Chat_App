@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/Room.dart';
 
 class DataBaseUtil {
+  //------------------------------USER---------------------------------------------
+
   static CollectionReference<MyUser> getUserCollectin() {
     return FirebaseFirestore.instance
         .collection(MyUser.CollecationName)
@@ -12,6 +14,19 @@ class DataBaseUtil {
             toFirestore: (user, _) => user.toJson());
   }
 
+  static Future<void> creatDBforUser(MyUser user) {
+    //To take same FirebaseAuth If Do not under stand go Register View model
+    return getUserCollectin().doc(user.id).set(user);
+  }
+
+  static Future<MyUser> readUser(String uId) async {
+    //Response Data For User By login ,take uId
+    var userSnapshot = await getUserCollectin().doc(uId).get();
+    return userSnapshot.data()!;
+  }
+
+  //---------------------------ROOMS------------------------------------------------
+
   static CollectionReference<Rooms> getRoomsCollectin() {
     return FirebaseFirestore.instance
         .collection(Rooms.CollecationName)
@@ -19,6 +34,25 @@ class DataBaseUtil {
             fromFirestore: (snapshot, _) => Rooms.fromJson(snapshot.data()!),
             toFirestore: (room, _) => room.toJson());
   }
+
+  static Future<void> creatRoom(String titel, String catId, String desc) {
+    var docRef = getRoomsCollectin().doc();
+    Rooms room = Rooms(Id: docRef.id, titel: titel, desc: desc, catId: catId);
+    return docRef.set(room);
+  }
+
+  // git Data rooms From Firebase
+  static Future<List<Rooms>> getRoomsFromFirStore() async {
+    var QuerySnapshot = await getRoomsCollectin().get();
+    return QuerySnapshot.docs.map((doc) => doc.data()).toList();
+  }
+
+  // git Data rooms From Firebase Stream
+  static Stream<QuerySnapshot<Rooms>> getRoomsFromFirStoreStream() {
+    return getRoomsCollectin().snapshots();
+  }
+
+//---------------------------MASSAGES------------------------------------------------
 
   //This CollectionReference into CollectionRoom
   static CollectionReference<Massage> getMassageCollectin(String roomId) {
@@ -39,39 +73,10 @@ class DataBaseUtil {
 
   static Stream<QuerySnapshot<Massage>> getMassageFromFirStoreStrem(
       String roomId) {
-    return getMassageCollectin(roomId).snapshots();
+    return getMassageCollectin(roomId).orderBy('dateTime').snapshots();
   }
 
-  static Future<void> creatRoom(String titel, String catId, String desc) {
-    var docRef = getRoomsCollectin().doc();
-    Rooms room = Rooms(Id: docRef.id, titel: titel, desc: desc, catId: catId);
-    return docRef.set(room);
+  static Future<void> DeletMassageFromFireStore(Massage massage) async {
+    await getMassageCollectin(massage.roomId).doc(massage.id).delete();
   }
-
-  // git Data rooms From Firebase
-  static Future<List<Rooms>> getRoomsFromFirStore() async {
-    var QuerySnapshot = await getRoomsCollectin().get();
-    return QuerySnapshot.docs.map((doc) => doc.data()).toList();
-  }
-
-  // git Data rooms From Firebase Stream
-  static Stream<QuerySnapshot<Rooms>> getRoomsFromFirStoreStream() {
-    return getRoomsCollectin().snapshots();
-  }
-
-//creat data base For User By Id user For Register Screen
-  static Future<void> creatDBforUser(MyUser user) {
-    return getUserCollectin().doc(user.id).set(user);
-  }
-
-  static Future<MyUser> readUser(String uId) async {
-    //Response Data For User By login ,take uId
-    var userSnapshot = await getUserCollectin().doc(uId).get();
-    return userSnapshot.data()!;
-  }
-
-// static Future<MyUser> readUrser(String userId)async{
-//   var userSnapShot=await getUserCollectin().doc(userId).get();
-//   return userSnapShot.data()!;
-// }
 }

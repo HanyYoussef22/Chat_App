@@ -64,7 +64,7 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeViewModel>
               // centerTitle: true,
               title: Text(
                 ' Chat',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               ),
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -79,7 +79,6 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeViewModel>
             body: Column(
               children: [
                 Expanded(
-
                     // child: ListView.builder(itemCount: viewModel.rooms.length,itemBuilder: (c,index){
                     //   return RoomDetails(viewModel.rooms[index]);
                     // }),

@@ -9,6 +9,7 @@ import 'ChatNavgetor.dart';
 class ChatViewModel extends BaseViewModel<ChatNavgetor> {
   late MyUser user;
   late Rooms rooms;
+  String? massege;
 
   AddMassegeInChat(String Content) async {
     Massage massage = Massage(
@@ -17,7 +18,12 @@ class ChatViewModel extends BaseViewModel<ChatNavgetor> {
         dateTime: DateTime.now().microsecondsSinceEpoch,
         senderId: user.id,
         SenderName: user.userName);
-    await DataBaseUtil.insertMassageToFirstore(massage);
     navigetor.ClearForm();
+    try {
+      await DataBaseUtil.insertMassageToFirstore(massage);
+      navigetor.ClearForm();
+    } catch (e) {
+      return '$e';
+    }
   }
 }
